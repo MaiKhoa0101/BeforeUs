@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- CỔNG API UNITY. Dự án này chỉ để BIÊN DỊCH, không bao giờ chạy.
+
+       Nó dịch lại y nguyên mã nguồn của Assets/Scripts/Combat.Tests, nhưng bằng đúng phiên bản
+       NUnit mà Unity 6000.6.7f1 nạp (3.5.0). Dùng API mới hơn thì build ở đây đỏ NGAY,
+       thay vì xanh ở dotnet test rồi đỏ trong Editor của Khoa.
+
+       Vì sao không ghim 3.5.0 thẳng cho bộ test chạy: assembly 3.5.0 là .NET Framework 4.5 và
+       tham chiếu System.Runtime.Remoting / System.Web, nạp vào .NET 10 là nổ lúc dò test.
+       BIÊN DỊCH thì không cần những thứ đó - chỉ cần metadata. Nên tách đôi: bản mới để CHẠY,
+       bản của Unity để KIỂM.
+
+       AssemblyName cố ý TRÙNG với bộ test thật: Assets/Scripts/Combat/AssemblyInfo.cs mở
+       InternalsVisibleTo cho đúng tên đó, mà CasualtyPolicyTests có dựng BattleReport (internal).
+
+       Nếu Unity nâng com.unity.ext.nunit thì test NUnitVersionGateTests sẽ đỏ và chỉ ra phải
+       đổi con số dưới đây thành mấy. Đừng nâng nó vì build phiền. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <AssemblyName>BeforeUs.Combat.Tests</AssemblyName>
+    <RootNamespace>BeforeUs.Combat.Tests</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>false</IsTestProject>
+
+    <!-- NU1701: NUnit 3.5.0 chỉ có assembly .NET Framework. Ở đây là CỐ Ý và vô hại,
+         vì dự án này không bao giờ chạy. -->
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../../../Assets/Scripts/Combat.Tests/**/*.cs" LinkBase="Combat.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../CombatLib/BeforeUs.Combat.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.5.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Biên dịch mã nguồn Core ngoài Unity.
+       netstandard2.1 + LangVersion 9 ép đúng trần API/cú pháp của Unity 2022.3,
+       và không có UnityEngine trong tầm với: asmdef noEngineReferences được kiểm chứng bằng compiler. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <AssemblyName>BeforeUs.Core</AssemblyName>
+    <RootNamespace>BeforeUs.Core</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../../../Assets/Scripts/Core/**/*.cs" LinkBase="Core" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+</Project>

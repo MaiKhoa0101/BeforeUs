@@ -1,0 +1,128 @@
+{
+  "_comment": "Before Us - quái thú, con mồi và chỉ số trong trận combat mini, từ docs/design.md §9. | BA LOÀI và BA CON MỒI dưới đây là danh sách [ĐỀ XUẤT] của Khoa trong §9, không agent nào được thêm loài mới. | MỌI CON SỐ trong file này là [ĐỀ XUẤT] do agent đặt: design.md không cho chỉ số trận nào cả. Chúng là các núm vặn hợp lệ của B3 (hiệu chỉnh tỉ lệ thắng thật cho bám công thức §5.2/§8) - chỉnh ở ĐÂY, không bao giờ chỉnh balance.json. | name, description và attack_style_text là CHỮ HIỆN CHO NGƯỜI CHƠI, bản nháp chờ Khoa chỉnh giọng văn; không chép sang strings.vi.json (đó là đất của Lead UI và sẽ tạo bản sao thứ hai). | Công thức tỉ lệ thắng §5.2/§8 KHÔNG nằm ở đây và không được phép nằm ở đây: nó chỉ có một bản cài, trong Core.",
+
+  "tribe_in_battle": {
+    "_comment": "Chỉ số TRONG TRẬN của một thành viên, trước khi nhân hệ số riêng của người đó. ĐỪNG LẪN với khối member_stats của balance.json: bên kia là speed/strength/hp sinh ra cùng thành viên (design.md §3) và thuộc quyền Lead Core; bên này là nền mà hệ số đó nhân vào, chỉ sống trong trận, thuộc nhánh combat.",
+    "move_speed": 2.4,
+    "attack_damage": 1.0,
+    "attack_interval": 0.9,
+    "attack_range": 1.4
+  },
+
+  "scaling": {
+    "_comment": "Hệ số nhân theo trạng thái ván. Đây là cách trận THẬT phản ánh những thứ mà công thức §5.2/§8 tính bằng cộng điểm phần trăm: công trình và giai đoạn làm bộ tộc mạnh lên, độ khó và vùng xa làm thú mạnh lên. KHÔNG được phụ thuộc k hay sĩ số: design.md §11 ghi rõ độ khó tăng theo thời gian, không theo sức mạnh thực tế của bộ tộc.",
+    "beast_hp_per_difficulty_level": 0.04,
+    "beast_damage_per_difficulty_level": 0.02,
+    "beast_hp_per_region": 0.05,
+    "tribe_damage_per_build_level": 0.10,
+    "tribe_damage_per_stage": 0.05
+  },
+
+  "levers": {
+    "_comment": "ĐANG THỬ NGHIỆM - MẶC ĐỊNH TẮT (mọi giá trị 0). Không phải lựa chọn thiết kế đã chốt. | Lý do tồn tại: §5.2 cho tỉ lệ thắng tăng +8 điểm mỗi người, nhưng trận mô phỏng tăng +20 tới +25. Đó là vấn đề CẤU TRÚC, không phải chọn số: sát thương cộng tuyến tính rồi so với một ngưỡng máu, nên xác suất thắng nhảy từ gần 0 lên gần 1 trong một quãng k rất hẹp. Chỉnh các con số khác DỜI được vị trí đường cong; làm THOẢI nó thì phải đổi thiết kế trận. | (A) max_attackers_per_beast: sân có bề ngang hữu hạn, người thứ n phải chờ chỗ. (B) beast_stat_variance / beast_spawn_x_jitter: phương sai lớn hơn làm vùng chuyển tiếp rộng ra mà không đổi giá trị trung bình. | CẢ HAI đều chạm vào CẢM GIÁC trận đánh, tức đất của Khoa ở B4. B3 chỉ ĐO và BÁO, không tự bật cái nào.",
+    "max_attackers_per_beast": 0,
+    "beast_stat_variance": 0.0,
+    "beast_spawn_x_jitter": 0.0
+  },
+
+  "battles": {
+    "_comment": "Một mục cho mỗi loại trận của Core (CombatKind). 'lure' là Dụ và hạ, 'prevent' là Phòng thủ - đúng bảng design.md §9. time_limit_seconds nằm trong dải 20-40 giây của §9; con số cuối do Khoa chốt ở B4 khi chơi thử, B3 chỉ đo cái giá cân bằng của từng mốc.",
+    "hunt": {
+      "battle_kind": "lure",
+      "time_limit_seconds": 30.0,
+      "field": { "width": 60.0, "height": 12.0, "goal_x": 60.0, "goal_radius": 0.6, "deploy_min_x": 4.0, "deploy_max_x": 52.0 },
+      "spawn_x": 8.0,
+      "spawn_spread_y": 3.0
+    },
+    "opportunity": {
+      "battle_kind": "lure",
+      "time_limit_seconds": 30.0,
+      "field": { "width": 60.0, "height": 12.0, "goal_x": 60.0, "goal_radius": 0.6, "deploy_min_x": 4.0, "deploy_max_x": 52.0 },
+      "spawn_x": 8.0,
+      "spawn_spread_y": 3.0
+    },
+    "defence": {
+      "battle_kind": "prevent",
+      "time_limit_seconds": 30.0,
+      "field": { "width": 60.0, "height": 12.0, "goal_x": 0.0, "goal_radius": 0.6, "deploy_min_x": 6.0, "deploy_max_x": 50.0 },
+      "spawn_x": 54.0,
+      "spawn_spread_y": 3.0
+    },
+    "explore": {
+      "battle_kind": "prevent",
+      "time_limit_seconds": 30.0,
+      "field": { "width": 60.0, "height": 12.0, "goal_x": 0.0, "goal_radius": 0.6, "deploy_min_x": 6.0, "deploy_max_x": 50.0 },
+      "spawn_x": 54.0,
+      "spawn_spread_y": 3.0
+    }
+  },
+
+  "species": [
+    {
+      "id": "leopard",
+      "name": "Báo hoa mai",
+      "description": "Nằm im trên cành cây cả buổi, rồi đổ xuống không một tiếng động. Chập tối nó hay lảng vảng quanh cửa hang.",
+      "attack_style": "hunt_weakest",
+      "attack_style_text": "Nó nhìn khắp lượt rồi chọn người yếu nhất, và chỉ đuổi theo đúng người đó.",
+      "regions": [0],
+      "roles": ["defence", "explore", "opportunity"],
+      "pack_size": 1,
+      "stats": { "hp": 21.0, "move_speed": 2.6, "attack_damage": 1.4, "attack_interval": 1.3, "attack_range": 1.3 }
+    },
+    {
+      "id": "hyena_pack",
+      "name": "Linh cẩu",
+      "description": "Không con nào đủ lớn để đáng sợ một mình. Chúng đi thành bầy, và bầy thì luôn đông hơn ta tưởng.",
+      "attack_style": "random",
+      "attack_style_text": "Chúng cắn bất cứ ai ở gần, không chọn lựa gì cả.",
+      "regions": [1],
+      "roles": ["defence", "explore"],
+      "pack_size": 3,
+      "stats": { "hp": 6.3, "move_speed": 2.6, "attack_damage": 1.0, "attack_interval": 1.2, "attack_range": 1.2 }
+    },
+    {
+      "id": "sabertooth",
+      "name": "Hổ răng kiếm",
+      "description": "Hai chiếc răng dài hơn bàn tay. Nó không rình, không né - nó đi thẳng tới chỗ đông nhất.",
+      "attack_style": "challenge_strongest",
+      "attack_style_text": "Nó tìm người khỏe nhất trong nhóm và nhắm thẳng vào người đó.",
+      "regions": [1],
+      "roles": ["opportunity"],
+      "pack_size": 1,
+      "stats": { "hp": 15.0, "move_speed": 2.5, "attack_damage": 1.1, "attack_interval": 1.2, "attack_range": 1.4 }
+    },
+    {
+      "id": "small_antelope",
+      "name": "Linh dương nhỏ",
+      "description": "Nhẹ và nhanh. Nó không đánh lại, chỉ cần chạy thoát là ta đói.",
+      "attack_style": "random",
+      "attack_style_text": "Nó chỉ húc bừa khi bị dồn vào đường cùng.",
+      "regions": [0, 1],
+      "roles": ["hunt"],
+      "pack_size": 1,
+      "stats": { "hp": 11.0, "move_speed": 2.9, "attack_damage": 0.5, "attack_interval": 1.6, "attack_range": 1.1 }
+    },
+    {
+      "id": "boar_piglet",
+      "name": "Lợn rừng con",
+      "description": "Chậm hơn linh dương nhưng lì hơn nhiều, và nó biết dùng răng nanh.",
+      "attack_style": "random",
+      "attack_style_text": "Nó quay lại húc người gần nhất, không nhằm ai riêng.",
+      "regions": [0, 1],
+      "roles": ["hunt"],
+      "pack_size": 1,
+      "stats": { "hp": 24.0, "move_speed": 2.6, "attack_damage": 0.9, "attack_interval": 1.5, "attack_range": 1.1 }
+    },
+    {
+      "id": "hare",
+      "name": "Thỏ rừng",
+      "description": "Ít thịt, nhưng bắt được một con cũng đủ cho cả nhà qua một tối.",
+      "attack_style": "random",
+      "attack_style_text": "Nó không đánh lại bao giờ, chỉ chạy.",
+      "regions": [0, 1],
+      "roles": ["hunt"],
+      "pack_size": 1,
+      "stats": { "hp": 8.0, "move_speed": 3.0, "attack_damage": 0.2, "attack_interval": 2.0, "attack_range": 1.0 }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "_comment": "Before Us balance v6. Mirrors tools/sim/before_us_sim.py (P and P_MVP). Arrays indexed by stage-1 unless noted. Change numbers only with Khoa's approval. | 2026-11-08 D13: activities.build.unlock and activities.hunt.unlock changed to turn:3. | 2026-11-08 playtest-01: added lose_when_crew_at_or_below (Khoa feedback 8) and morale.on_member_death (Khoa feedback 1). The value -2 is a SUPERVISOR [DE XUAT], not Khoa s number: picked to match combat_results.morale_on_loss so no new scale is introduced. Khoa must approve. | 2026-11-08 v7 (design-v7-draft.md Phan A + D6): gather.base/per_region/dry_penalty/dry_min/floor REMOVED - thay bang plants.json. difficulty.per_level.gather -> find_chance_multiplier. Them gather.floor_numerator/denominator (san 1/3 bat buoc di kiem an), discover_*, guaranteed_find_speed, speed_rare_bonus. TAT CA LA [DE XUAT].",
+  "mode": "mvp",
+  "start": { "crew": 4, "region": 0, "stage": 1 },
+  "member_stats": { "speed": [0.8, 1.2], "strength": [0.8, 1.2], "hp": [3, 7] },
+  "win_stage": { "full": 5, "mvp": 3 },
+  "lose_when_crew_at_or_below": 1,
+  "energy_max": [4, 5, 6, 7],
+  "upkeep_per_member": [1, 2, 2, 3],
+  "starvation_deaths": 1,
+  "food_carries_over": false,
+  "activities": {
+    "gather":  { "energy": 1, "neuron_per_member": 1, "unlock": "start",      "morale_on_success": 1 },
+    "morale":  { "energy": 1, "neuron_per_member": 1, "unlock": "start",      "morale_per_member": 2 },
+    "build":   { "energy": 2, "neuron_per_member": 2, "unlock": "turn:3", "morale_on_success": 1 },
+    "hunt":    { "energy": 2, "neuron_per_member": 6, "unlock": "turn:3", "base_win": 0.50 },
+    "explore": { "energy": 3, "neuron_per_member": 6, "unlock": "turn:6",     "base_win": 0.40 }
+  },
+  "gather": {
+    "fire_bonus_from_stage": 4, "fire_bonus": 1,
+    "floor_numerator": 1, "floor_denominator": 3,
+    "discover_base": 0.15, "discover_per_member": 0.05, "discover_max": 0.60,
+    "speed_rare_bonus": 0.30
+  },
+  "combat_odds": { "per_member": 0.08, "per_build_level": 0.05, "min": 0.05, "max": 0.92 },
+  "combat_results": {
+    "hunt_food_per_member": [0, 5, 7, 10],
+    "morale_on_win": 3,
+    "morale_on_loss": -2,
+    "win_death_chance_avg": 0.5,
+    "loss_deaths": 2
+  },
+  "birth": { "morale_cost": 4, "max_per_turn": 1 },
+  "morale": { "on_member_death": -2 },
+  "evolution": {
+    "required_neuron": { "full": [85, 135, 190, 240], "mvp": [150, 250, 190, 240] },
+    "feats": [
+      { "from_stage": 1, "combat_wins": 1, "hunts": 0, "migrated_ever": 0 },
+      { "from_stage": 2, "combat_wins": 0, "hunts": 2, "migrated_ever": 0 },
+      { "from_stage": 3, "combat_wins": 0, "hunts": 2, "migrated_ever": 1 },
+      { "from_stage": 4, "combat_wins": 0, "hunts": 3, "migrated_ever": 0 }
+    ]
+  },
+  "events": {
+    "grace_turns": 5,
+    "tutorial_turn": 3,
+    "tutorial_reward": { "morale": 2, "neuron": 3, "combat_wins": 1 },
+    "chance_per_turn": 0.7,
+    "share_noncombat": 0.4,
+    "share_raid": { "wet": 0.20, "dry": 0.25 },
+    "noncombat_good": { "food": 4, "morale": 2 },
+    "noncombat_bad": { "food": -3, "morale": -2 },
+    "opportunity_win": { "food": 6, "morale": 3, "neuron": 4 },
+    "raid_win": { "morale": 2, "neuron": 3 }
+  },
+  "defence_odds": { "base": 0.35, "per_member": 0.05, "per_build_level": 0.06, "per_stage": 0.04, "per_region": -0.05, "min": 0.05, "max": 0.95 },
+  "raid_quota_by_region": [1, 2, 2, 3, 3, 3],
+  "climate": { "phase_length": 10, "first_phase": "wet" },
+  "difficulty": {
+    "period_turns": { "full": 20, "mvp": 12 },
+    "per_level": { "combat_odds": -0.02, "raid_quota": 1, "bad_event_food": -1, "bad_event_morale": -1, "find_chance_multiplier": -0.18 }
+  },
+  "regions": { "max_index": { "full": 5, "mvp": 1 }, "names": ["Rừng nhiệt đới", "Savan", "Sa mạc", "Đồng bằng sông Nile"] }
+}

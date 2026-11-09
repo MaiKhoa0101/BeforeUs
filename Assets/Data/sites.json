@@ -1,0 +1,39 @@
+{
+  "_comment": "Before Us - cho o va cong trinh theo vung, theo docs/design-v7-draft.md Phan B va Phan F. MOI CON SO O DAY LA [DE XUAT] tru hai so Khoa noi ro: vung 0 co tran 8 cho va mo san 4 cho (Khoa 2026-11-09: 'vung 1 co toi da 8 cho, khoi dau la 4 cho, can phai thuc hien don cho cho 4 cho con lai'). | SLOT LA CHO CHO THANH VIEN, tuc suc chua hang - KHONG phai o dat cong trinh. Don mot cong trinh thi MO THEM MOT CHO, toi tran cua vung. Vi vay so cong trinh cua mot vung = capacity_max - capacity_open_at_start. Quy uoc 'moi cong trinh mo dung mot cho' la [DE XUAT], Khoa co the doi thanh mot cong trinh mo nhieu cho. | lair.capacity_base va lair.capacity_per_build_level cua balance.json DA BI THAY bang bang nay - xem docs/balance-log.md. | O dung thuc an KHONG mo cho: no la he thuc pham, khong phai cho nam. Day la [DE XUAT]. | TEN VA MO TA KHONG NAM O DAY: ISiteSystem cua nhanh UI co y khong co truong ten; noi dung hien cho nguoi choi nam o strings.vi.json theo khoa 'site.<id>.name'. | MOC DAT SO: suc manh trung binh mot nguoi la 1.0 (design.md S3), nen 3.0 nghia la ba nguoi trung binh vua du.",
+  "regions": [
+    {
+      "region": 0,
+      "capacity_max": 8,
+      "capacity_open_at_start": 4,
+      "sites": [
+        { "id": "nhanh_cay_gay", "kind": "wood", "stage": 1, "strength_required": 1.8, "requires_node": null, "art_key": "site_nhanh_cay_gay" },
+        { "id": "bai_da_nho", "kind": "stone", "stage": 1, "strength_required": 2.2, "requires_node": null, "art_key": "site_bai_da_nho" },
+        { "id": "hoc_da_tru_mua", "kind": "stone", "stage": 1, "strength_required": 3.0, "requires_node": null, "art_key": "site_hoc_da_tru_mua" },
+        { "id": "tang_da_lon", "kind": "stone", "stage": 2, "strength_required": 3.6, "requires_node": "s2_stone_tools", "art_key": "site_tang_da_lon" }
+      ]
+    },
+    {
+      "region": 1,
+      "capacity_max": 14,
+      "capacity_open_at_start": 7,
+      "sites": [
+        { "id": "to_moi_bo", "kind": "earth", "stage": 1, "strength_required": 2.4, "requires_node": null, "art_key": "site_to_moi_bo" },
+        { "id": "bui_co_voi", "kind": "wood", "stage": 1, "strength_required": 2.8, "requires_node": null, "art_key": "site_bui_co_voi" },
+        { "id": "go_dat_nut", "kind": "earth", "stage": 1, "strength_required": 3.2, "requires_node": null, "art_key": "site_go_dat_nut" },
+        { "id": "xac_cay_kho", "kind": "wood", "stage": 2, "strength_required": 3.4, "requires_node": null, "art_key": "site_xac_cay_kho" },
+        { "id": "bui_gai_ran", "kind": "wood", "stage": 2, "strength_required": 3.8, "requires_node": null, "art_key": "site_bui_gai_ran" },
+        { "id": "vach_da_vo", "kind": "stone", "stage": 2, "strength_required": 4.2, "requires_node": "s2_stone_tools", "art_key": "site_vach_da_vo" },
+        { "id": "dong_da_cuoi", "kind": "stone", "stage": 2, "strength_required": 4.8, "requires_node": "s2_stone_tools", "art_key": "site_dong_da_cuoi" }
+      ]
+    }
+  ],
+  "food_nest": {
+    "id": "o_dung_thuc_an",
+    "art_key": "site_o_dung_thuc_an",
+    "tiers": [
+      { "tier": 1, "strength_required": 2.0, "speed_threshold_relief": 0.2 },
+      { "tier": 2, "strength_required": 4.0, "speed_threshold_relief": 0.5 },
+      { "tier": 3, "strength_required": 7.0, "speed_threshold_relief": 1.0 }
+    ]
+  }
+}

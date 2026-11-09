@@ -1,0 +1,1262 @@
+/* Màn chính vòng lượt (A1). Màn hình ngang, 1920x1080 (docs/decisions.md D8).
+   Không có chữ nào ở đây: USS chỉ lo hình thức. */
+
+.screen {
+    flex-grow: 1;
+    flex-direction: column;
+    background-color: rgb(28, 26, 24);
+    padding: 12px 20px;
+}
+
+/* --- thanh thông tin trên cùng --- */
+
+.header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.chip {
+    background-color: rgb(50, 46, 42);
+    border-radius: 6px;
+    padding: 5px 12px;
+    margin-right: 8px;
+    margin-bottom: 4px;
+    color: rgb(232, 226, 216);
+    font-size: 17px;
+}
+
+.status-row {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.energy-label {
+    color: rgb(240, 206, 120);
+    font-size: 19px;
+    -unity-font-style: bold;
+    margin-right: 10px;
+}
+
+.energy-pips {
+    flex-direction: row;
+    align-items: center;
+}
+
+.pip {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    margin-right: 5px;
+    background-color: rgb(70, 64, 58);
+}
+
+.pip-spent {
+    background-color: rgb(240, 206, 120);
+}
+
+.plan-rule-label {
+    flex-grow: 1;
+    color: rgb(150, 142, 132);
+    font-size: 14px;
+    margin-left: 18px;
+    white-space: normal;
+}
+
+/* --- ô dự báo thức ăn --- */
+
+.forecast {
+    margin-top: 10px;
+    padding: 10px 16px;
+    background-color: rgb(42, 48, 42);
+    border-left-width: 5px;
+    border-left-color: rgb(120, 170, 110);
+    border-radius: 6px;
+}
+
+.forecast-short {
+    background-color: rgb(58, 38, 36);
+    border-left-color: rgb(206, 96, 86);
+}
+
+.forecast-title {
+    color: rgb(170, 164, 154);
+    font-size: 14px;
+}
+
+.forecast-numbers {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2px;
+}
+
+.forecast-number {
+    color: rgb(238, 234, 226);
+    font-size: 26px;
+    -unity-font-style: bold;
+    margin-right: 26px;
+}
+
+.forecast-status {
+    color: rgb(196, 214, 182);
+    font-size: 18px;
+    white-space: normal;
+}
+
+.forecast-short .forecast-status {
+    color: rgb(240, 160, 150);
+}
+
+.forecast-note {
+    color: rgb(140, 134, 126);
+    font-size: 13px;
+    margin-top: 4px;
+    white-space: normal;
+}
+
+/* --- hai cột --- */
+
+.body {
+    flex-direction: row;
+    flex-grow: 1;
+    margin-top: 12px;
+}
+
+.pane {
+    flex-direction: column;
+    background-color: rgb(38, 35, 32);
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.pane-activities {
+    flex-grow: 2;
+    flex-basis: 0;
+    margin-right: 12px;
+}
+
+.pane-members {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.pane-title {
+    color: rgb(214, 208, 198);
+    font-size: 18px;
+    -unity-font-style: bold;
+    margin-bottom: 8px;
+}
+
+.hint-label {
+    color: rgb(190, 182, 168);
+    font-size: 15px;
+    margin-bottom: 8px;
+    white-space: normal;
+}
+
+.activity-scroll {
+    flex-grow: 1;
+}
+
+.activity-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/* --- thẻ hoạt động --- */
+
+.activity-card {
+    width: 290px;
+    margin: 0 10px 10px 0;
+    padding: 10px 12px;
+    background-color: rgb(52, 48, 44);
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0);
+    align-items: flex-start;
+    white-space: normal;
+}
+
+.activity-card:hover {
+    background-color: rgb(62, 57, 52);
+}
+
+.activity-card-selected {
+    border-color: rgb(240, 206, 120);
+    background-color: rgb(66, 60, 50);
+}
+
+.activity-card-locked {
+    opacity: 0.55;
+    background-color: rgb(42, 40, 38);
+}
+
+.activity-name {
+    color: rgb(240, 236, 228);
+    font-size: 20px;
+    -unity-font-style: bold;
+}
+
+.activity-cost {
+    color: rgb(170, 162, 150);
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.activity-effect {
+    color: rgb(186, 196, 180);
+    font-size: 13px;
+    margin-top: 6px;
+    white-space: normal;
+}
+
+.activity-party {
+    color: rgb(240, 206, 120);
+    font-size: 15px;
+    margin-top: 6px;
+}
+
+.activity-party-empty {
+    color: rgb(140, 134, 126);
+}
+
+.activity-lock {
+    color: rgb(226, 150, 120);
+    font-size: 13px;
+    margin-top: 6px;
+    white-space: normal;
+}
+
+.activity-message {
+    color: rgb(240, 130, 120);
+    font-size: 13px;
+    margin-top: 6px;
+    white-space: normal;
+}
+
+.activity-clear-button {
+    margin-top: 8px;
+    padding: 2px 10px;
+    font-size: 13px;
+    background-color: rgb(70, 64, 58);
+    color: rgb(226, 220, 210);
+    border-radius: 4px;
+    border-width: 0;
+}
+
+/* --- danh sách thành viên --- */
+
+.member-scroll {
+    flex-grow: 1;
+}
+
+.member-list {
+    flex-direction: column;
+}
+
+.member-row {
+    margin: 0 0 6px 0;
+    padding: 8px 10px;
+    background-color: rgb(50, 46, 42);
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0);
+    align-items: flex-start;
+    white-space: normal;
+}
+
+.member-row:hover {
+    background-color: rgb(60, 55, 50);
+}
+
+.member-row-selected {
+    border-color: rgb(240, 206, 120);
+    background-color: rgb(66, 60, 50);
+}
+
+.member-row-assigned {
+    background-color: rgb(46, 54, 46);
+}
+
+.member-name {
+    color: rgb(238, 234, 226);
+    font-size: 16px;
+    -unity-font-style: bold;
+}
+
+.member-stats {
+    color: rgb(160, 154, 144);
+    font-size: 13px;
+    margin-top: 1px;
+}
+
+.member-status {
+    color: rgb(186, 196, 180);
+    font-size: 13px;
+    margin-top: 3px;
+    white-space: normal;
+}
+
+/* --- chân màn hình --- */
+
+.footer {
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+.end-turn-button {
+    min-width: 260px;
+    height: 56px;
+    font-size: 22px;
+    -unity-font-style: bold;
+    color: rgb(28, 26, 24);
+    background-color: rgb(240, 206, 120);
+    border-radius: 8px;
+    border-width: 0;
+}
+
+.end-turn-button:hover {
+    background-color: rgb(250, 220, 140);
+}
+
+/* --- hộp thoại phủ --- */
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.72);
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.dialog {
+    width: 620px;
+    max-height: 76%;
+    padding: 20px 24px;
+    background-color: rgb(44, 41, 38);
+    border-radius: 10px;
+}
+
+.dialog-title {
+    color: rgb(240, 236, 228);
+    font-size: 24px;
+    -unity-font-style: bold;
+    margin-bottom: 10px;
+}
+
+.dialog-scroll {
+    flex-grow: 1;
+}
+
+.dialog-body {
+    color: rgb(210, 204, 194);
+    font-size: 16px;
+    white-space: normal;
+}
+
+.result-lines {
+    flex-direction: column;
+}
+
+.result-line {
+    color: rgb(214, 208, 198);
+    font-size: 16px;
+    margin-bottom: 4px;
+    white-space: normal;
+}
+
+.dialog-button {
+    align-self: flex-end;
+    margin-top: 14px;
+    min-width: 160px;
+    height: 44px;
+    font-size: 18px;
+    color: rgb(28, 26, 24);
+    background-color: rgb(240, 206, 120);
+    border-radius: 6px;
+    border-width: 0;
+}
+
+/* --- banner đổi pha khí hậu (design.md §10) --- */
+
+.climate-banner {
+    margin-top: 8px;
+    padding: 8px 16px;
+    background-color: rgb(54, 48, 38);
+    border-left-width: 5px;
+    border-left-color: rgb(214, 168, 92);
+    border-radius: 6px;
+}
+
+.climate-banner-text {
+    color: rgb(238, 212, 160);
+    font-size: 16px;
+    white-space: normal;
+}
+
+/* --- gợi ý hướng dẫn (design.md §13): tối đa 2 câu, cạnh thứ nó nói tới, tắt được --- */
+
+.hint-slot {
+    flex-direction: column;
+}
+
+.hint-box {
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 6px;
+    padding: 7px 10px;
+    background-color: rgb(40, 56, 66);
+    border-left-width: 4px;
+    border-left-color: rgb(118, 176, 206);
+    border-radius: 5px;
+}
+
+.hint-text {
+    flex-grow: 1;
+    flex-shrink: 1;
+    color: rgb(202, 226, 238);
+    font-size: 13px;
+    white-space: normal;
+}
+
+.hint-dismiss-button {
+    flex-shrink: 0;
+    margin-left: 10px;
+    padding: 1px 9px;
+    font-size: 12px;
+    color: rgb(28, 26, 24);
+    background-color: rgb(150, 198, 220);
+    border-radius: 4px;
+    border-width: 0;
+}
+
+.small-button {
+    margin-left: 8px;
+    padding: 3px 11px;
+    font-size: 13px;
+    color: rgb(226, 220, 210);
+    background-color: rgb(62, 57, 52);
+    border-radius: 4px;
+    border-width: 0;
+}
+
+.small-button:hover {
+    background-color: rgb(76, 70, 64);
+}
+
+/* --- thẻ hoạt động: không đủ năng lượng --- */
+
+.activity-card-unaffordable {
+    opacity: 0.6;
+}
+
+.activity-unaffordable-note {
+    color: rgb(214, 170, 110);
+    font-size: 13px;
+    margin-top: 6px;
+    white-space: normal;
+}
+
+/* --- mục tra cứu gợi ý --- */
+
+.dialog-buttons {
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.dialog-button-quiet {
+    margin-right: 10px;
+    color: rgb(226, 220, 210);
+    background-color: rgb(70, 64, 58);
+}
+
+.catalog-entry {
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.catalog-when {
+    color: rgb(240, 206, 120);
+    font-size: 14px;
+    -unity-font-style: bold;
+}
+
+.catalog-text {
+    color: rgb(214, 208, 198);
+    font-size: 15px;
+    white-space: normal;
+}
+
+/* --- màn mạng lưới neuron (A3, design.md §7) --- */
+
+.small-button-strong {
+    color: rgb(28, 26, 24);
+    background-color: rgb(166, 196, 224);
+}
+
+.small-button-strong:hover {
+    background-color: rgb(186, 212, 236);
+}
+
+.dialog-wide {
+    width: 1120px;
+}
+
+.neuron-head {
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.neuron-head-line {
+    color: rgb(190, 184, 174);
+    font-size: 15px;
+}
+
+.neuron-have {
+    color: rgb(166, 196, 224);
+    font-size: 19px;
+    -unity-font-style: bold;
+}
+
+.neuron-message {
+    color: rgb(240, 130, 120);
+    font-size: 14px;
+    margin-bottom: 8px;
+    white-space: normal;
+}
+
+.neuron-branches {
+    flex-direction: row;
+}
+
+.neuron-branch {
+    flex-grow: 1;
+    flex-basis: 0;
+    margin-right: 12px;
+}
+
+.neuron-branch-title {
+    color: rgb(240, 206, 120);
+    font-size: 17px;
+    -unity-font-style: bold;
+    margin-bottom: 6px;
+}
+
+.neuron-node {
+    margin-bottom: 8px;
+    padding: 9px 11px;
+    background-color: rgb(52, 48, 44);
+    border-radius: 7px;
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0);
+    align-items: flex-start;
+    white-space: normal;
+}
+
+.neuron-node:hover {
+    background-color: rgb(62, 57, 52);
+}
+
+.neuron-node-buyable {
+    border-color: rgb(166, 196, 224);
+}
+
+.neuron-node-purchased {
+    background-color: rgb(46, 56, 46);
+    border-color: rgb(120, 170, 110);
+}
+
+.neuron-node-blocked {
+    opacity: 0.6;
+}
+
+.neuron-node-name {
+    color: rgb(240, 236, 228);
+    font-size: 16px;
+    -unity-font-style: bold;
+}
+
+.neuron-node-meta {
+    color: rgb(166, 196, 224);
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.neuron-node-effect {
+    color: rgb(178, 188, 174);
+    font-size: 12px;
+    margin-top: 4px;
+    white-space: normal;
+}
+
+.neuron-node-block {
+    color: rgb(226, 150, 120);
+    font-size: 12px;
+    margin-top: 4px;
+    white-space: normal;
+}
+
+.neuron-node-state {
+    color: rgb(150, 200, 140);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* --- ô tiến hóa: hai điều kiện độc lập, nói riêng từng cái (design.md §7) --- */
+
+.neuron-evolve {
+    margin-top: 6px;
+    padding: 12px 14px;
+    background-color: rgb(46, 42, 54);
+    border-radius: 8px;
+    border-left-width: 5px;
+    border-left-color: rgb(168, 150, 214);
+}
+
+.neuron-evolve-title {
+    color: rgb(222, 208, 244);
+    font-size: 19px;
+    -unity-font-style: bold;
+}
+
+.neuron-condition {
+    font-size: 14px;
+    margin-top: 5px;
+    white-space: normal;
+}
+
+.neuron-condition-done {
+    color: rgb(150, 200, 140);
+}
+
+.neuron-condition-missing {
+    color: rgb(226, 150, 120);
+}
+
+.neuron-evolve-button {
+    margin-top: 12px;
+    min-width: 200px;
+    height: 44px;
+    font-size: 18px;
+    -unity-font-style: bold;
+    color: rgb(28, 26, 24);
+    background-color: rgb(168, 150, 214);
+    border-radius: 6px;
+    border-width: 0;
+}
+
+.neuron-evolve-button:disabled {
+    opacity: 0.45;
+}
+
+/* --- menu, màn thắng, màn thua, màn ăn mừng tiến hóa (A4) --- */
+
+.dialog-centered {
+    align-items: center;
+}
+
+.dialog-button-centered {
+    align-self: center;
+}
+
+.menu-title {
+    color: rgb(240, 206, 120);
+    font-size: 46px;
+    -unity-font-style: bold;
+    margin-bottom: 10px;
+}
+
+.dialog-evolve {
+    border-left-width: 6px;
+    border-left-color: rgb(168, 150, 214);
+}
+
+.end-lines {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top-width: 1px;
+    border-top-color: rgb(78, 72, 66);
+}
+
+/* --- thanh nhuệ khí (góp ý 2, playtest 01) --- */
+
+.morale-box {
+    flex-direction: column;
+    margin-left: 22px;
+    min-width: 230px;
+}
+
+.morale-label {
+    color: rgb(214, 170, 206);
+    font-size: 15px;
+    -unity-font-style: bold;
+}
+
+.morale-track {
+    height: 8px;
+    margin-top: 3px;
+    background-color: rgb(62, 56, 60);
+    border-radius: 4px;
+}
+
+.morale-fill {
+    height: 8px;
+    background-color: rgb(198, 134, 186);
+    border-radius: 4px;
+}
+
+.morale-hint {
+    color: rgb(150, 142, 148);
+    font-size: 12px;
+    margin-top: 2px;
+    white-space: normal;
+}
+
+/* --- xem trước trận (góp ý 3, playtest 01) --- */
+
+.activity-preview {
+    color: rgb(214, 196, 150);
+    font-size: 13px;
+    margin-top: 4px;
+    white-space: normal;
+}
+
+/* --- hình tạm (Assets/Art/Placeholder, do agent vẽ) --- */
+
+.art-thumb-activity {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+    flex-shrink: 0;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.art-thumb-member {
+    width: 42px;
+    height: 56px;
+    margin-right: 9px;
+    flex-shrink: 0;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.activity-card-head {
+    flex-direction: row;
+    align-items: center;
+}
+
+.member-row {
+    flex-direction: row;
+    align-items: center;
+}
+
+.member-text {
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+/* --- màn hình cộng đồng (góp ý 6-7, playtest 01) --- */
+
+.community-body {
+    flex-direction: row;
+    flex-grow: 1;
+    margin-top: 10px;
+}
+
+.community-side {
+    width: 230px;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.community-center {
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(44, 40, 36);
+    border-radius: 12px;
+    margin: 0 14px;
+    padding: 14px;
+}
+
+.community-center-title {
+    color: rgb(190, 182, 168);
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.slot-row {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    min-height: 96px;
+}
+
+/* một chỗ trong hang */
+
+.slot {
+    width: 84px;
+    height: 96px;
+    margin: 0 4px;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0);
+    border-radius: 8px;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0;
+}
+
+.slot-empty {
+    background-color: rgb(50, 46, 42);
+    border-color: rgb(62, 57, 52);
+}
+
+.slot:hover {
+    background-color: rgb(58, 53, 48);
+}
+
+.slot-assigned {
+    background-color: rgb(46, 56, 46);
+}
+
+.slot-selected {
+    border-color: rgb(240, 206, 120);
+    background-color: rgb(66, 60, 50);
+}
+
+.slot-art {
+    width: 72px;
+    height: 84px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.slot-caption {
+    color: rgb(170, 164, 154);
+    font-size: 11px;
+    -unity-text-align: middle-center;
+}
+
+/* trung tâm bấm được */
+
+.community-hub {
+    min-width: 230px;
+    margin: 10px 0;
+    padding: 10px 18px;
+    background-color: rgb(62, 56, 70);
+    border-width: 2px;
+    border-color: rgb(120, 106, 156);
+    border-radius: 10px;
+    color: rgb(226, 216, 244);
+    font-size: 18px;
+    -unity-font-style: bold;
+}
+
+.community-hub:hover {
+    background-color: rgb(74, 66, 84);
+}
+
+/* vật thể hai bên */
+
+.community-object {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 10px;
+    background-color: rgb(52, 48, 44);
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    white-space: normal;
+}
+
+.community-object:hover {
+    background-color: rgb(62, 57, 52);
+}
+
+.community-object-selected {
+    border-color: rgb(240, 206, 120);
+    background-color: rgb(66, 60, 50);
+}
+
+.community-object-disabled {
+    opacity: 0.55;
+}
+
+.community-object-art {
+    width: 96px;
+    height: 96px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.community-object-name {
+    color: rgb(240, 236, 228);
+    font-size: 17px;
+    -unity-font-style: bold;
+    margin-top: 4px;
+}
+
+.community-object-status {
+    color: rgb(240, 206, 120);
+    font-size: 13px;
+}
+
+.community-object-reason {
+    color: rgb(226, 150, 120);
+    font-size: 12px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+
+/* bảng giao việc */
+
+.task-panel {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background-color: rgb(42, 48, 52);
+    border-left-width: 5px;
+    border-left-color: rgb(140, 176, 196);
+    border-radius: 6px;
+}
+
+.task-head {
+    flex-direction: row;
+    align-items: center;
+}
+
+.task-title {
+    color: rgb(238, 234, 226);
+    font-size: 19px;
+    -unity-font-style: bold;
+    margin-right: 12px;
+}
+
+.task-party {
+    flex-grow: 1;
+    color: rgb(240, 206, 120);
+    font-size: 15px;
+}
+
+.task-detail {
+    color: rgb(190, 200, 186);
+    font-size: 13px;
+    margin-top: 4px;
+    white-space: normal;
+}
+
+.task-lines {
+    flex-direction: column;
+    margin-top: 2px;
+}
+
+.task-line {
+    color: rgb(206, 214, 204);
+    font-size: 13px;
+    white-space: normal;
+}
+
+/* chân màn cộng đồng */
+
+.community-footer {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.community-forecast {
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 0;
+    margin-right: 14px;
+}
+
+/* --- slot công trình quanh hang (design-v7 Phần B) --- */
+
+.community-side-title {
+    color: rgb(190, 182, 168);
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.community-sites-scroll {
+    flex-grow: 1;
+}
+
+.community-sites {
+    flex-direction: column;
+}
+
+.community-site {
+    margin-bottom: 8px;
+    padding: 8px;
+}
+
+.community-site .community-object-art {
+    width: 56px;
+    height: 56px;
+}
+
+.community-site .community-object-name {
+    font-size: 15px;
+}
+
+.community-object-sub {
+    color: rgb(166, 176, 166);
+    font-size: 12px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+
+/* --- menu trung tâm (góp ý 7) --- */
+
+.hub-sections {
+    flex-direction: column;
+}
+
+.hub-section {
+    flex-direction: column;
+    margin-bottom: 14px;
+}
+
+.hub-section-title {
+    color: rgb(240, 206, 120);
+    font-size: 17px;
+    -unity-font-style: bold;
+    margin-bottom: 6px;
+}
+
+.hub-section-empty {
+    color: rgb(150, 142, 132);
+    font-size: 14px;
+}
+
+.hub-item {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 6px;
+    padding: 8px 10px;
+    background-color: rgb(52, 48, 44);
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0);
+    border-radius: 7px;
+    white-space: normal;
+}
+
+.hub-item:hover {
+    background-color: rgb(62, 57, 52);
+}
+
+.hub-item-ready {
+    border-color: rgb(150, 200, 140);
+}
+
+.hub-item-disabled {
+    opacity: 0.55;
+}
+
+.hub-item-art {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    flex-shrink: 0;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.hub-item-text {
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.hub-item-name {
+    color: rgb(240, 236, 228);
+    font-size: 16px;
+    -unity-font-style: bold;
+}
+
+.hub-item-status {
+    color: rgb(186, 196, 180);
+    font-size: 13px;
+    white-space: normal;
+}
+
+.hub-item-reason {
+    color: rgb(226, 150, 120);
+    font-size: 12px;
+    white-space: normal;
+}
+
+.hub-item-badge {
+    flex-shrink: 0;
+    margin-left: 10px;
+    color: rgb(150, 200, 140);
+    font-size: 13px;
+}
+
+/* --- chọn người di cư (design-v7 §F.2) --- */
+
+.migrate-panel {
+    margin-top: 8px;
+    padding: 8px 10px;
+    background-color: rgb(58, 44, 40);
+    border-left-width: 4px;
+    border-left-color: rgb(206, 128, 96);
+    border-radius: 5px;
+}
+
+.migrate-title {
+    color: rgb(240, 206, 170);
+    font-size: 15px;
+    -unity-font-style: bold;
+    white-space: normal;
+}
+
+.migrate-left {
+    color: rgb(240, 150, 130);
+    font-size: 13px;
+    margin-top: 2px;
+    white-space: normal;
+}
+
+.migrate-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+.migrate-chip {
+    margin: 0 6px 6px 0;
+    padding: 3px 11px;
+    font-size: 13px;
+    color: rgb(214, 208, 198);
+    background-color: rgb(70, 60, 56);
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0);
+    border-radius: 4px;
+}
+
+.migrate-chip-chosen {
+    color: rgb(28, 26, 24);
+    background-color: rgb(206, 170, 120);
+    border-color: rgb(240, 206, 120);
+}
+
+.migrate-foot {
+    flex-direction: row;
+    align-items: center;
+}
+
+.migrate-chosen {
+    flex-grow: 1;
+    color: rgb(226, 190, 160);
+    font-size: 13px;
+}
+
+/* --- tên và trạng thái ngay trên slot (góp ý Khoa, playtest màn cộng đồng) --- */
+
+.slot-name {
+    color: rgb(238, 234, 226);
+    font-size: 12px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+
+.slot-status {
+    color: rgb(160, 176, 158);
+    font-size: 10px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+
+.slot-focused {
+    border-color: rgb(166, 210, 240);
+    background-color: rgb(50, 62, 72);
+}
+
+/* --- thanh thẻ thành viên --- */
+
+.member-bar {
+    flex-direction: column;
+    margin-top: 10px;
+    padding: 8px 10px;
+    background-color: rgb(38, 35, 32);
+    border-radius: 8px;
+}
+
+.member-bar-title {
+    color: rgb(190, 182, 168);
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.member-bar-scroll {
+    max-height: 132px;
+}
+
+.member-cards {
+    flex-direction: row;
+}
+
+.member-card {
+    width: 164px;
+    flex-shrink: 0;
+    margin-right: 8px;
+    padding: 7px 9px;
+    background-color: rgb(52, 48, 44);
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0);
+    border-radius: 7px;
+    align-items: flex-start;
+    white-space: normal;
+}
+
+.member-card:hover {
+    background-color: rgb(62, 57, 52);
+}
+
+.member-card-assigned {
+    background-color: rgb(46, 56, 46);
+}
+
+.member-card-focused {
+    border-color: rgb(166, 210, 240);
+    background-color: rgb(50, 62, 72);
+}
+
+.member-card-name {
+    color: rgb(240, 236, 228);
+    font-size: 15px;
+    -unity-font-style: bold;
+    white-space: normal;
+}
+
+.member-card-stat {
+    color: rgb(200, 206, 196);
+    font-size: 12px;
+}
+
+.member-card-status {
+    color: rgb(240, 206, 120);
+    font-size: 12px;
+    margin-top: 3px;
+    white-space: normal;
+}
+
+.member-card-help {
+    color: rgb(150, 162, 150);
+    font-size: 11px;
+    margin-top: 3px;
+    white-space: normal;
+}

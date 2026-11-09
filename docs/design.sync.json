@@ -1,0 +1,10 @@
+{
+  "_comment": "Chong troi cho ban chieu Markdown cua tai lieu docx. docx la BAN CHINH; file .md canh no chi la ban chieu sinh tu dong. Truoc khi tin ban chieu, chay: python tools/doc/docx_read.py --check <docx>. Bam lech nghia la ai do da sua docx trong Word ma chua sinh lai ban chieu — doc ban chieu cu luc do la doc mot tai lieu da loi thoi.",
+  "docx": "design.docx",
+  "sha256": "a7906ac8542fcaa3b9aa488143d077bc1f260139bfe40e3395a0c8bb0f69b38e",
+  "generated_from": "design.md",
+  "blocks": 99,
+  "generated_at": "2026-11-08T18:55:59Z",
+  "tool": "tools/doc/docx_write.py",
+  "projection": "design.md"
+}

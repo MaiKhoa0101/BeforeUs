@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Công cụ hiệu chỉnh combat (HANDOFF.md B3).
+       Chạy bằng: dotnet run (chỉ định project là thư mục này).
+       In ra Markdown; hứng vào file nếu muốn. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <AssemblyName>BeforeUs.Combat.Calibrate</AssemblyName>
+    <RootNamespace>BeforeUs.Combat.Calibrate</RootNamespace>
+    <Nullable>disable</Nullable>
+    <IsPackable>false</IsPackable>
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../CombatLib/BeforeUs.Combat.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,146 @@
+{
+  "generated_by": "tools/art/make_placeholder_art.py",
+  "palette": {
+    "FUR_DARK": [
+      72,
+      54,
+      42
+    ],
+    "FUR_MID": [
+      104,
+      78,
+      60
+    ],
+    "FUR_LIGHT": [
+      142,
+      110,
+      84
+    ],
+    "SKIN": [
+      198,
+      160,
+      126
+    ],
+    "DARK": [
+      34,
+      28,
+      24
+    ],
+    "WOOD_DARK": [
+      92,
+      64,
+      40
+    ],
+    "WOOD_MID": [
+      134,
+      98,
+      62
+    ],
+    "WOOD_LIGHT": [
+      168,
+      130,
+      86
+    ],
+    "STONE_DARK": [
+      84,
+      84,
+      92
+    ],
+    "STONE_MID": [
+      122,
+      122,
+      132
+    ],
+    "STONE_LIGHT": [
+      158,
+      158,
+      168
+    ],
+    "LEAF_DARK": [
+      72,
+      104,
+      56
+    ],
+    "LEAF_MID": [
+      106,
+      144,
+      76
+    ],
+    "BERRY": [
+      176,
+      62,
+      58
+    ],
+    "BERRY_DARK": [
+      132,
+      44,
+      42
+    ]
+  },
+  "files": [
+    {
+      "file": "member_stage1_male_stand.png",
+      "group": "member",
+      "width": 96,
+      "height": 128,
+      "ground_line": 122,
+      "mo_ta": "Vượn người vóc lớn, lông nâu sẫm, đứng hơi gù, hai tay dài buông gần đất."
+    },
+    {
+      "file": "member_stage1_male_sit.png",
+      "group": "member",
+      "width": 96,
+      "height": 128,
+      "ground_line": 122,
+      "mo_ta": "Cùng nhân vật trên, ngồi xếp chân về phía trước, một tay chống đất."
+    },
+    {
+      "file": "member_stage1_female_stand.png",
+      "group": "member",
+      "width": 96,
+      "height": 128,
+      "ground_line": 122,
+      "mo_ta": "Vượn người nhỏ hơn, lông nâu sáng, có túm lông trên đỉnh đầu, đứng."
+    },
+    {
+      "file": "member_stage1_female_sit.png",
+      "group": "member",
+      "width": 96,
+      "height": 128,
+      "ground_line": 122,
+      "mo_ta": "Cùng nhân vật trên, ngồi xếp chân."
+    },
+    {
+      "file": "object_food_nest.png",
+      "group": "object",
+      "width": 96,
+      "height": 96,
+      "ground_line": 88,
+      "mo_ta": "Ổ đựng thức ăn: rổ đan bằng cành nâu, miệng rộng, bên trong có mấy quả đỏ và một chiếc lá."
+    },
+    {
+      "file": "object_club.png",
+      "group": "object",
+      "width": 96,
+      "height": 96,
+      "ground_line": 88,
+      "mo_ta": "Cây gậy to: khúc gỗ nặng dựng chéo từ dưới trái lên trên phải, đầu trên phình to, có mấu."
+    },
+    {
+      "file": "object_rock_pile.png",
+      "group": "object",
+      "width": 96,
+      "height": 96,
+      "ground_line": 88,
+      "mo_ta": "Bãi đá chưa dọn: ba tảng đá xám chồng lệch nhau, ba sắc xám khác nhau, có bóng đổ."
+    },
+    {
+      "file": "object_branch.png",
+      "group": "object",
+      "width": 96,
+      "height": 96,
+      "ground_line": 88,
+      "mo_ta": "Nhánh cây gãy nằm chéo trên mặt đất, hai nhánh con chĩa lên, ba chiếc lá xanh."
+    }
+  ]
+}

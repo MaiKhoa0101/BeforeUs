@@ -1,0 +1,17 @@
+{
+    "name": "BeforeUs.UI",
+    "rootNamespace": "BeforeUs.UI",
+    "references": [
+        "BeforeUs.Core",
+        "BeforeUs.Game"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

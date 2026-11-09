@@ -1,0 +1,72 @@
+# Before Us — .gitattributes
+#
+# ⚠ PHẢI CHẠY `git lfs install` MỘT LẦN TRƯỚC COMMIT ĐẦU TIÊN.
+#    Không chạy thì file này không có tác dụng, ảnh và scene vào thẳng lịch sử git dưới dạng
+#    nhị phân, và gỡ ra sau phải viết lại toàn bộ lịch sử. Rẻ bây giờ, rất đắt về sau.
+#
+#    Kiểm đã chạy đúng chưa:  git lfs track
+#    Kiểm file nào đang qua LFS sau khi add:  git lfs ls-files
+
+# ---------------------------------------------------------------- Chuẩn hoá xuống dòng
+#
+# Unity đọc được cả hai kiểu, nhưng để git tự quyết thì diff sẽ nhiễu giữa máy Windows và máy
+# khác. Chốt: file text dùng LF trong kho.
+
+* text=auto eol=lf
+
+# .meta là TEXT. Không bao giờ đưa vào LFS — chúng nhỏ, cần đọc được trong diff, và chúng giữ
+# GUID nên phải xem được bằng mắt khi có xung đột.
+*.meta text eol=lf
+
+*.cs      text diff=csharp eol=lf
+*.json    text eol=lf
+*.uxml    text eol=lf
+*.uss     text eol=lf
+*.md      text eol=lf
+*.py      text eol=lf
+*.asmdef  text eol=lf
+*.txt     text eol=lf
+*.shader  text eol=lf
+*.cginc   text eol=lf
+
+# ---------------------------------------------------------------- Git LFS: ảnh và âm thanh
+
+*.png   filter=lfs diff=lfs merge=lfs -text
+*.jpg   filter=lfs diff=lfs merge=lfs -text
+*.jpeg  filter=lfs diff=lfs merge=lfs -text
+*.gif   filter=lfs diff=lfs merge=lfs -text
+*.bmp   filter=lfs diff=lfs merge=lfs -text
+*.tga   filter=lfs diff=lfs merge=lfs -text
+*.tif   filter=lfs diff=lfs merge=lfs -text
+*.tiff  filter=lfs diff=lfs merge=lfs -text
+*.psd   filter=lfs diff=lfs merge=lfs -text
+*.ai    filter=lfs diff=lfs merge=lfs -text
+
+*.wav   filter=lfs diff=lfs merge=lfs -text
+*.mp3   filter=lfs diff=lfs merge=lfs -text
+*.ogg   filter=lfs diff=lfs merge=lfs -text
+*.aif   filter=lfs diff=lfs merge=lfs -text
+
+# ---------------------------------------------------------------- Git LFS: phông và mô hình
+
+*.ttf   filter=lfs diff=lfs merge=lfs -text
+*.otf   filter=lfs diff=lfs merge=lfs -text
+*.fbx   filter=lfs diff=lfs merge=lfs -text
+*.blend filter=lfs diff=lfs merge=lfs -text
+*.blend1 filter=lfs diff=lfs merge=lfs -text
+
+# ---------------------------------------------------------------- Git LFS: asset nhị phân Unity
+#
+# Scene và prefab của Unity LÀ text YAML khi bật Force Text (dự án này đang vậy), nhưng chúng
+# hợp nhất rất tệ và phình nhanh. Đưa vào LFS theo yêu cầu S1 của HANDOFF.md.
+#
+# ⚠ Hệ quả phải biết: file qua LFS thì `git diff` KHÔNG đọc được nội dung, và hai người sửa
+#    cùng một scene sẽ xung đột nhị phân, không hợp nhất được. Với dự án một người thì không
+#    sao. Nếu sau này có người thứ hai sửa scene, cân nhắc bỏ ba dòng dưới đây ra khỏi LFS.
+
+*.unity   filter=lfs diff=lfs merge=lfs -text
+*.prefab  filter=lfs diff=lfs merge=lfs -text
+*.asset   filter=lfs diff=lfs merge=lfs -text
+
+# KHÔNG đưa vào LFS: .cs .json .uxml .uss .md .meta .asmdef
+# Chúng là text, cần đọc được trong diff và review.

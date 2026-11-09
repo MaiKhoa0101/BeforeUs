@@ -1,0 +1,16 @@
+{
+    "name": "BeforeUs.Combat",
+    "rootNamespace": "BeforeUs.Combat",
+    "references": [
+        "BeforeUs.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

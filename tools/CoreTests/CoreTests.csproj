@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Chạy bằng: dotnet test tools/CoreTests
+       NUnit ghim ở 3.x để cùng một mã test chạy được cả ở đây lẫn trong Unity Test Runner. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <AssemblyName>BeforeUs.Core.Tests</AssemblyName>
+    <RootNamespace>BeforeUs.Core.Tests</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../../Assets/Scripts/Core.Tests/**/*.cs" LinkBase="Core.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="CoreLib/BeforeUs.Core.csproj" />
+
+    <!-- Cổng tương thích Unity: cùng mã nguồn test, biên dịch lại bằng đúng NUnit 3.5.0 của Unity,
+         KHÔNG chạy. Build kèm bộ test này nên không quên được.
+         ReferenceOutputAssembly=false + PrivateAssets=all để NUnit 3.5.0 không tràn sang đây
+         và làm hỏng đúng cái nó sinh ra để bảo vệ. -->
+    <ProjectReference Include="UnityApiGate/UnityApiGate.csproj"
+                      ReferenceOutputAssembly="false"
+                      PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="NUnit" Version="3.14.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+  </ItemGroup>
+
+</Project>

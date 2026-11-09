@@ -1,0 +1,167 @@
+{
+  "_comment": "Before Us - mạng lưới neuron giai đoạn 1-2, từ docs/design.md §7.3-7.4. Giá: cost.mvp là [MVP], cost.full là bản đầy đủ. Mọi hiệu ứng có số đều là [ĐỀ XUẤT] trong design.md và chỉ áp dụng khi applyNodeEffects = true. Đổi số phải có Khoa duyệt. | effect_text là CHỮ HIỆN CHO NGƯỜI CHƠI, BẢN NHÁP do agent diễn đạt lại từ cột Hiệu ứng của design.md §7.3-7.4 - giọng văn chờ Khoa chỉnh, cơ chế và mọi con số đã chốt và không đổi. Dấu thập phân dùng dấu phẩy theo quy ước tiếng Việt (0,05 = 0.05 trong design.md); +0.05 tỉ lệ thắng được diễn đạt là 5 điểm phần trăm, cùng một lượng.| CHO TRONG DO D13 DE LAI (Khoa quyet 2026-11-08): s2_stone_tools va s2_scavenge_meat truoc day mo khoa Xay dung va San bat. D13 cho hai hoat dong do mo tu luot 3, nen hai nut mat vai tro cu. Chung VAN la nut cong bat buoc tinh vao 250 neuron cua giai doan 2, nhung hien KHONG lam gi. Cho Khoa dat hieu ung moi. Day khong phai thiet ke, day la no.",
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Vượn người",
+      "branches": [
+        { "id": "body", "name": "Thân thể" },
+        { "id": "food", "name": "Ăn uống" },
+        { "id": "social", "name": "Xã hội" }
+      ],
+      "nodes": [
+        {
+          "id": "s1_climbing", "branch": "body", "type": "root",
+          "name": "Leo trèo khéo", "requires": null,
+          "cost": { "full": 10, "mvp": 18 },
+          "effect_text": "Mỗi người đi Kiếm ăn mang về thêm 0,5 thức ăn; phần lẻ của cả nhóm bị bỏ đi",
+          "effects": [ { "kind": "gather_flat_per_member", "value": 0.5 } ]
+        },
+        {
+          "id": "s1_short_upright", "branch": "body", "type": "gate",
+          "name": "Đứng thẳng ngắn", "requires": "s1_climbing",
+          "cost": { "full": 15, "mvp": 27 },
+          "effect_text": "Tốc độ của mọi thành viên +0,05",
+          "effects": [ { "kind": "speed_bonus", "value": 0.05 } ]
+        },
+        {
+          "id": "s1_strong_jaw", "branch": "body", "type": "optional",
+          "name": "Hàm khỏe", "requires": "s1_climbing",
+          "cost": { "full": 15, "mvp": 27 },
+          "effect_text": "Sức mạnh của mọi thành viên +0,1",
+          "effects": [ { "kind": "strength_bonus", "value": 0.1 } ]
+        },
+        {
+          "id": "s1_young_leaves", "branch": "food", "type": "root",
+          "name": "Nhai lá non", "requires": null,
+          "cost": { "full": 10, "mvp": 18 },
+          "effect_text": "Khi gặp sự kiện mất mùa trái cây, bộ tộc mất ít hơn 1 thức ăn",
+          "effects": [ { "kind": "bad_event_food_reduction", "value": 1 } ]
+        },
+        {
+          "id": "s1_dig_roots", "branch": "food", "type": "gate",
+          "name": "Đào rễ củ", "requires": "s1_young_leaves",
+          "cost": { "full": 15, "mvp": 27 },
+          "effect_text": "Mỗi người đi Kiếm ăn mang về thêm 1 thức ăn",
+          "effects": [ { "kind": "gather_yield_bonus", "value": 1 } ]
+        },
+        {
+          "id": "s1_insects_eggs", "branch": "food", "type": "optional",
+          "name": "Ăn côn trùng, trứng", "requires": "s1_young_leaves",
+          "cost": { "full": 15, "mvp": 27 },
+          "effect_text": "Trong pha Khô, hái lượm bị trừ ít hơn 1 thức ăn mỗi người",
+          "effects": [ { "kind": "dry_penalty_reduction", "value": 1 } ]
+        },
+        {
+          "id": "s1_grooming", "branch": "social", "type": "root",
+          "name": "Chải lông cho nhau", "requires": null,
+          "cost": { "full": 10, "mvp": 18 },
+          "effect_text": "Mỗi lần Nâng tinh thần được thêm 1 tinh thần",
+          "effects": [ { "kind": "morale_activity_bonus", "value": 1 } ]
+        },
+        {
+          "id": "s1_alarm_call", "branch": "social", "type": "gate",
+          "name": "Tiếng gọi báo động", "requires": "s1_grooming",
+          "cost": { "full": 15, "mvp": 27 },
+          "effect_text": "Tỉ lệ thắng khi thú tấn công hang tăng thêm 5 điểm phần trăm",
+          "effects": [ { "kind": "defence_odds_bonus", "value": 0.05 } ]
+        },
+        {
+          "id": "s1_carry_young", "branch": "social", "type": "optional",
+          "name": "Cõng con trên lưng", "requires": "s1_grooming",
+          "cost": { "full": 15, "mvp": 27 },
+          "effect_text": "Sinh thêm thành viên chỉ cần 3 tinh thần thay vì 4",
+          "effects": [ { "kind": "birth_morale_cost", "value": 3 } ]
+        },
+        {
+          "id": "s1_evolve", "branch": null, "type": "evolve",
+          "name": "Tiến hóa: Người vượn phương Nam", "requires": null,
+          "cost": { "full": 10, "mvp": 15 },
+          "effect_text": "Lên giai đoạn 2 — Người vượn phương Nam",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "name": "Người vượn phương Nam",
+      "branches": [
+        { "id": "body", "name": "Thân thể" },
+        { "id": "tools", "name": "Công cụ, ăn uống" },
+        { "id": "social", "name": "Xã hội" }
+      ],
+      "nodes": [
+        {
+          "id": "s2_bipedal", "branch": "body", "type": "root",
+          "name": "Đi bằng hai chân", "requires": null,
+          "cost": { "full": 15, "mvp": 28 },
+          "effect_text": "Tốc độ của mọi thành viên +0,05; đánh nhanh hơn trong combat",
+          "effects": [ { "kind": "speed_bonus", "value": 0.05 } ]
+        },
+        {
+          "id": "s2_arched_foot", "branch": "body", "type": "gate",
+          "name": "Bàn chân vòm", "requires": "s2_bipedal",
+          "cost": { "full": 25, "mvp": 42 },
+          "effect_text": "Tỉ lệ thắng khi Khám phá tăng thêm 5 điểm phần trăm",
+          "effects": [ { "kind": "explore_odds_bonus", "value": 0.05 } ]
+        },
+        {
+          "id": "s2_throw_stones", "branch": "body", "type": "optional",
+          "name": "Ném đá", "requires": "s2_bipedal",
+          "cost": { "full": 20, "mvp": 37 },
+          "effect_text": "Ném đá từ xa khi đánh. Bản đầu tiên chưa có lối đánh tầm xa, tạm thời chỉ cộng sức mạnh +0,1",
+          "effects": [ { "kind": "strength_bonus", "value": 0.1 } ]
+        },
+        {
+          "id": "s2_stone_tools", "branch": "tools", "type": "root",
+          "name": "Dùng đá đập", "requires": null,
+          "cost": { "full": 15, "mvp": 28 },
+          "effect_text": "Nút cổng bắt buộc trên đường tiến hóa. Chưa có hiệu ứng riêng.",
+          "effects": [ { "kind": "unlock_activity", "activity": "build" } ]
+        },
+        {
+          "id": "s2_scavenge_meat", "branch": "tools", "type": "gate",
+          "name": "Ăn xác thịt, tủy xương", "requires": "s2_stone_tools",
+          "cost": { "full": 25, "mvp": 42 },
+          "effect_text": "Nút cổng bắt buộc trên đường tiến hóa. Chưa có hiệu ứng riêng.",
+          "effects": [ { "kind": "unlock_activity", "activity": "hunt" } ]
+        },
+        {
+          "id": "s2_digging_stick", "branch": "tools", "type": "optional",
+          "name": "Gậy đào", "requires": "s2_stone_tools",
+          "cost": { "full": 20, "mvp": 37 },
+          "effect_text": "Trong pha Ẩm, mỗi người đi Kiếm ăn mang về thêm 1 thức ăn",
+          "effects": [ { "kind": "gather_yield_bonus_wet", "value": 1 } ]
+        },
+        {
+          "id": "s2_share_food", "branch": "social", "type": "root",
+          "name": "Chia sẻ thức ăn", "requires": null,
+          "cost": { "full": 15, "mvp": 28 },
+          "effect_text": "Cuối lượt nếu chỉ thiếu đúng 1 phần ăn thì không ai chết đói",
+          "effects": [ { "kind": "starvation_forgive_one", "value": 1 } ]
+        },
+        {
+          "id": "s2_watch_rotation", "branch": "social", "type": "gate",
+          "name": "Canh gác luân phiên", "requires": "s2_share_food",
+          "cost": { "full": 25, "mvp": 42 },
+          "effect_text": "Biết trước 1 lượt khi thú sắp tấn công hang",
+          "effects": [ { "kind": "raid_warning", "value": 1 } ]
+        },
+        {
+          "id": "s2_teach_young", "branch": "social", "type": "optional",
+          "name": "Dạy trẻ", "requires": "s2_share_food",
+          "cost": { "full": 20, "mvp": 37 },
+          "effect_text": "Thành viên mới sinh ra có tốc độ và sức mạnh +0,05",
+          "effects": [ { "kind": "newborn_stat_bonus", "value": 0.05 } ]
+        },
+        {
+          "id": "s2_evolve", "branch": null, "type": "evolve",
+          "name": "Tiến hóa: Người khéo léo", "requires": null,
+          "cost": { "full": 15, "mvp": 40 },
+          "effect_text": "Lên giai đoạn 3 — Người khéo léo. Ở bản đầu tiên, đây là điều kiện thắng ván",
+          "effects": []
+        }
+      ]
+    }
+  ]
+}

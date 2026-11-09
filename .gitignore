@@ -1,0 +1,108 @@
+# Before Us — .gitignore
+#
+# Mục tiêu: không đẩy thứ Unity tự sinh lại được lên GitHub, nhưng GIỮ toàn bộ thứ làm nên
+# dự án. KHÔNG loại cả thư mục Assets/ — mã nguồn Core, Game, UI, Combat đều nằm trong
+# Assets/Scripts/. Loại Assets/ là loại cả dự án.
+#
+# Quy tắc .meta: mỗi file trong Assets/ có một .meta giữ GUID của nó. Scene và prefab tham
+# chiếu nhau bằng GUID, nên mất .meta là đứt mọi tham chiếu. Vì vậy ở đây KHÔNG có dòng nào
+# loại .meta của thứ đang được theo dõi.
+
+# ---------------------------------------------------------------- Unity tự sinh
+
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+
+# Thư mục con cùng tên ở bất kỳ đâu (ví dụ Packages/*/Temp)
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+
+# Unity sinh file này khi crash
+sysinfo.txt
+crashlytics-build.properties
+
+# ---------------------------------------------------------------- IDE và solution
+
+# Unity tự sinh lại toàn bộ .csproj/.sln từ asmdef mỗi lần mở Editor.
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+
+# NGOẠI LỆ: project dotnet trong tools/ là mã nguồn VIẾT TAY, không phải Unity sinh.
+# Mất chúng là `dotnet test tools/CoreTests` gãy ngay sau khi clone (HANDOFF.md S3).
+!tools/**/*.csproj
+!tools/**/*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+.vs/
+.vscode/
+.idea/
+*.DotSettings.user
+
+# ---------------------------------------------------------------- Đầu ra build dotnet
+#
+# tools/ ĐƯỢC THEO DÕI (mô phỏng tham chiếu, bộ test chạy ngoài Unity, script sinh ảnh).
+# Chỉ loại đầu ra biên dịch bên trong nó.
+
+tools/**/bin/
+tools/**/obj/
+**/[Bb]in/[Dd]ebug/
+**/[Bb]in/[Rr]elease/
+
+# ---------------------------------------------------------------- Đầu ra đóng gói
+
+*.unitypackage
+*.apk
+*.aab
+*.app
+*.ipa
+*.exe
+*.dmg
+
+# ---------------------------------------------------------------- Rác hệ điều hành
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ---------------------------------------------------------------- Ghi chú về những thứ CỐ Ý
+#                                                                   không loại
+#
+# Assets/**               — mã nguồn, dữ liệu, UXML/USS, ảnh, scene. Giữ hết.
+# Assets/~Prototype/**    — Unity bỏ qua thư mục kết thúc bằng ~, nhưng git thì không.
+#                           docs/decisions.md D3: "di dời, không xoá". Giữ.
+# Assets/**/*.meta        — GUID. Mất là đứt tham chiếu scene. Giữ bằng mọi giá.
+# ProjectSettings/**      — thiếu nó thì người clone về mở ra một dự án KHÁC:
+#                           hướng màn hình, render pipeline, tag, layer đều nằm đây.
+# Packages/manifest.json  — danh sách gói. Thiếu thì Unity nạp sai phiên bản gói.
+# Packages/packages-lock.json — ghim đúng phiên bản. Giữ để mọi máy giống nhau.
+# docs/**                 — luật chơi, quyết định của Khoa, API. Đây là trí nhớ của dự án.
+# tools/**                — mô phỏng tham chiếu và bộ test chạy ngoài Unity.
+# .gitattributes          — cấu hình Git LFS. Phải được theo dõi thì LFS mới chạy.

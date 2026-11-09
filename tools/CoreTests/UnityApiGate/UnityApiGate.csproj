@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- CỔNG API UNITY. Dự án này chỉ để BIÊN DỊCH, không bao giờ chạy.
+
+       Nó dịch lại y nguyên mã nguồn của Assets/Scripts/Core.Tests, nhưng bằng đúng phiên bản
+       NUnit mà Unity 6000.6.7f1 nạp (3.5.0). Dùng API mới hơn thì build ở đây đỏ NGAY,
+       thay vì xanh ở dotnet test rồi đỏ trong Editor của Khoa.
+
+       Số 3.5.0 đọc từ FileVersion của chính DLL:
+         Library/PackageCache/com.unity.ext.nunit@*/net472/unity-custom/nunit.framework.dll
+         AssemblyVersion = FileVersion = 3.5.0.0
+       KHÔNG đọc từ package.json — "version": "2.1.0" ở đó là số của GÓI com.unity.ext.nunit,
+       không phải của NUnit. Hai số nằm cạnh nhau và rất dễ nhầm; 2026-11-08 tôi đã nhầm đúng chỗ này.
+
+       Vì sao không ghim 3.5.0 thẳng cho bộ test chạy: assembly 3.5.0 là .NET Framework 4.5 và
+       tham chiếu System.Runtime.Remoting / System.Web, nạp vào .NET 10 là nổ lúc dò test.
+       BIÊN DỊCH thì không cần những thứ đó — chỉ cần metadata. Nên tách đôi: bản mới để CHẠY,
+       bản của Unity để KIỂM.
+
+       AssemblyName cố ý TRÙNG với bộ test thật: Assets/Scripts/Core/AssemblyInfo.cs mở
+       InternalsVisibleTo cho đúng tên đó, mà EventSystemTests dựng TurnEventContext (ctor internal).
+
+       Mẫu lấy từ tools/CombatTests/UnityApiGate của Lead Combat, giữ giống nhau có chủ đích. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <AssemblyName>BeforeUs.Core.Tests</AssemblyName>
+    <RootNamespace>BeforeUs.Core.Tests</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>false</IsTestProject>
+
+    <!-- NU1701: NUnit 3.5.0 chỉ có assembly .NET Framework. Ở đây là CỐ Ý và vô hại,
+         vì dự án này không bao giờ chạy. -->
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../../../Assets/Scripts/Core.Tests/**/*.cs" LinkBase="Core.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../CoreLib/BeforeUs.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.5.0" />
+  </ItemGroup>
+
+</Project>
